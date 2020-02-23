@@ -1,3 +1,20 @@
 h1, h2, h3 {
   text-align: center;
 }
+
+.task-manager {
+  margin: 1em auto;
+  width: 80%;
+}
+
+.task-actions {
+  margin: 0.5em 0;
+}
+
+.new-task-form .new-task-actions {
+  padding: 2em;
+}
+
+.new-task-form .new-task-input{
+  margin: 0.5em 0;
+}
