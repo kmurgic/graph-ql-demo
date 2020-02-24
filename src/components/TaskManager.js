@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import Typography from '@material-ui/core/Typography';
 import TaskActions from './TaskActions';
 import TaskTable from './TaskTable';
 import TaskDialog from './TaskDialog';
 import mockTasks from '../ mockServer/mockTasks';
 
-const TaskManager = props => {
+const TaskManager = () => {
   const [newTaskDialogOpen, setTaskDialogOpen] = useState(false);
   const [tasks, setTasks] = useState(mockTasks);
   const [activeTask, setActiveTask] = useState(null);
@@ -43,11 +44,17 @@ const TaskManager = props => {
       <TaskActions
         createNewTask={() => setTaskDialogOpen(true)}
       />
-      <TaskTable
-        tasks={tasks}
-        editTask={openEditTask}
-        removeTask={removeTask}
-        toggleTaskComplete={toggleTaskComplete} />
+      {tasks.length
+        ? (
+          <TaskTable
+            tasks={tasks}
+            editTask={openEditTask}
+            removeTask={removeTask}
+            toggleTaskComplete={toggleTaskComplete}
+          />
+        )
+        : <Typography>No tasks assigned.</Typography>
+      }
       {(newTaskDialogOpen || activeTask) &&
         <TaskDialog
           submit={activeTask ? completeEditTask : addTask}
