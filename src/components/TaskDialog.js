@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import uuid from 'uuid/v4';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -19,7 +20,7 @@ const TaskDialog = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     submit({
-      id: task?.id || undefined,
+      id: task?.id || uuid(),
       assignee: {
         id: assignee,
         name: users.find(user => user.id === assignee)?.name || '',
