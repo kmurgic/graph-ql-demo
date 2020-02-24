@@ -5,10 +5,16 @@ h1, h2, h3 {
 .task-manager {
   margin: 1em auto;
   width: 80%;
+  overflow: scroll;
 }
 
 .task-actions {
   margin: 0.5em 0;
+}
+
+.task-table {
+  border: 1px solid
+  rgba(224, 224, 224, 1);
 }
 
 .new-task-form .new-task-actions {
@@ -17,4 +23,34 @@ h1, h2, h3 {
 
 .new-task-form .new-task-input{
   margin: 0.5em 0;
+}
+
+.task-table .MuiTableCell-root {
+  padding: 0.25em 0.5em;
+  border: 1px solid
+  rgba(224, 224, 224, 1);
+}
+
+.task-table .MuiFormControlLabel-root {
+  margin: 0;
+}
+
+.category {
+  width: 12em;
+}
+
+.is-complete {
+  width: 4em;
+}
+
+.task {
+  width: 12em;
+}
+
+.assignee {
+  width: 9em;
+}
+
+.time {
+  width: 6em;
 }
