@@ -8,8 +8,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import Task from './Task';
 
-const TaskTable = ({ tasks, toggleTaskComplete }) => {
-
+const TaskTable = (props) => {
+  const {
+    tasks,
+    editTask,
+    removeTask,
+    toggleTaskComplete } = props;
   return (
     <TableContainer component={Paper}>
       <Table className="task-table">
@@ -21,6 +25,8 @@ const TaskTable = ({ tasks, toggleTaskComplete }) => {
             <TableCell className="assignee">Assigned To</TableCell>
             <TableCell className="estimated-time">Estimated Time (minutes)</TableCell>
             <TableCell className="actual-time">Actual Time (minutes)</TableCell>
+            <TableCell className="action"></TableCell>
+            <TableCell className="action"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -28,6 +34,8 @@ const TaskTable = ({ tasks, toggleTaskComplete }) => {
             <Task
               key={task.id}
               {...task}
+              editTask={editTask}
+              removeTask={removeTask}
               toggleTaskComplete={toggleTaskComplete}
             />
           ))}
