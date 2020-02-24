@@ -8,8 +8,11 @@ const Task = props => {
   const {
     id,
     isComplete,
-    assignee,
+    category,
     description,
+    assignee,
+    estimatedTime,
+    actualTime,
     toggleTaskComplete
   } = props;
   return (
@@ -30,8 +33,8 @@ const Task = props => {
       </TableCell>
       <TableCell className="description">{description}</TableCell>
       <TableCell className="assignee">{assignee}</TableCell>
-      <TableCell className="time">30 minutes</TableCell>
-      <TableCell className="time">1 hour</TableCell>
+      <TableCell className="time">{estimatedTime}</TableCell>
+      <TableCell className="time">{actualTime}</TableCell>
     </TableRow>
   )
 }

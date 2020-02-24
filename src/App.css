@@ -51,6 +51,10 @@ h1, h2, h3 {
   width: 9em;
 }
 
-.time {
+.estimated-time {
+  width: 8em;
+}
+
+.actual-time {
   width: 6em;
 }

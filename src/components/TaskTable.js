@@ -19,8 +19,8 @@ const TaskTable = ({ tasks, toggleTaskComplete }) => {
             <TableCell className="is-complete" align="center">Complete</TableCell>
             <TableCell className="description">Description</TableCell>
             <TableCell className="assignee">Assigned To</TableCell>
-            <TableCell className="time">Estimated Time</TableCell>
-            <TableCell className="time">Actual Time</TableCell>
+            <TableCell className="estimated-time">Estimated Time (minutes)</TableCell>
+            <TableCell className="actual-time">Actual Time (minutes)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
