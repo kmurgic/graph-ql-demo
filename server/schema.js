@@ -10,6 +10,7 @@ const typeDefs = gql`
     House
     Livestock
     Garden
+    Yard
   }
 
   type Category {
@@ -43,15 +44,14 @@ const typeDefs = gql`
     name: String!
   }
 
-  input addTaskInput {
-    id: ID!
+  input AddTaskInput {
     assignee: UserInput!
     category: CategoryInput!
     description: String!
     estimatedTime: Int
   }
 
-  input updateTaskInput {
+  input UpdateTaskInput {
     id: ID!
     assignee: UserInput
     category: CategoryInput
@@ -61,14 +61,14 @@ const typeDefs = gql`
     actualTime: Int
   }
 
-  type deleteTaskResponse {
+  type DeleteTaskResponse {
     id: ID!
   }
 
   type Mutation {
-    addTask(input: addTaskInput!): Task!
-    updateTask(input: updateTaskInput!): Task!
-    deleteTask(id: ID!): deleteTaskResponse!
+    addTask(newTask: AddTaskInput!): Task!
+    updateTask(updates: UpdateTaskInput!): Task!
+    removeTask(id: ID!): DeleteTaskResponse!
   }
 `
 

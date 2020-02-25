@@ -10,6 +10,10 @@ const categories = [
   {
     id: 'garden',
     name: 'Garden'
+  },
+  {
+    id: 'yard',
+    name: 'Yard'
   }
 ];
 

@@ -12,8 +12,7 @@ const TaskTable = (props) => {
   const {
     tasks,
     editTask,
-    removeTask,
-    toggleTaskComplete } = props;
+  } = props;
   return (
     <TableContainer component={Paper}>
       <Table className="task-table">
@@ -35,8 +34,6 @@ const TaskTable = (props) => {
               key={task.id}
               {...task}
               editTask={editTask}
-              removeTask={removeTask}
-              toggleTaskComplete={toggleTaskComplete}
             />
           ))}
         </TableBody>

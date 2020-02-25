@@ -1,4 +1,5 @@
 import React from 'react';
+import { useMutation } from '@apollo/react-hooks';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -6,6 +7,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Delete from '@material-ui/icons/Delete';
 import Edit from '@material-ui/icons/Edit';
+import { REMOVE_TASK, UPDATE_TASK } from '../mutations';
+import { GET_TASKS } from '../queries';
 
 const Task = props => {
   const {
@@ -17,9 +20,36 @@ const Task = props => {
     estimatedTime,
     actualTime,
     editTask,
-    removeTask,
-    toggleTaskComplete
   } = props;
+
+  const handleError = (err) => console.error(err);
+  const [removeTaskMutation] = useMutation(REMOVE_TASK, {
+    awaitRefetchQueries: true,
+    refetchQueries: [{ query: GET_TASKS }],
+    onError: handleError,
+  });
+
+  const [updateTaskMutation] = useMutation(UPDATE_TASK, {
+    awaitRefetchQueries: true,
+    refetchQueries: [{ query: GET_TASKS }],
+    onError: handleError,
+  });
+
+  const removeTask = () => {
+    const variables = { id };
+    removeTaskMutation({ variables });
+  };
+
+  const toggleTaskComplete = () => {
+    const variables = {
+      updates: {
+        id,
+        isComplete: !isComplete
+      }
+    };
+    updateTaskMutation({ variables });
+  };
+
   return (
     <TableRow>
       <TableCell className="category">
@@ -31,7 +61,7 @@ const Task = props => {
             <Checkbox
               color="default"
               checked={isComplete}
-              onClick={() => toggleTaskComplete(id)}
+              onClick={() => toggleTaskComplete()}
             />
           }
         />
@@ -48,12 +78,12 @@ const Task = props => {
         </IconButton>
       </TableCell>
       <TableCell className="action">
-        <IconButton onClick={() => removeTask(id)}>
+        <IconButton onClick={() => removeTask()}>
           <Delete color="inherit" style={{ color: '#e53935' }} />
         </IconButton>
       </TableCell>
     </TableRow>
-  )
-}
+  );
+};
 
 export default Task;

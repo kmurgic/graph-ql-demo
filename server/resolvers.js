@@ -13,13 +13,13 @@ const resolvers = {
     }
   },
   Mutation: {
-    addTask(_, newTask) {
+    addTask(_, { newTask }) {
       return database.addTask(newTask);
     },
-    updateTask(_, updates) {
+    updateTask(_, { updates }) {
       return database.updateTask(updates);
     },
-    deleteTask(_, { id }) {
+    removeTask(_, { id }) {
       return database.deleteTask(id);
     }
   }

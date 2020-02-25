@@ -1,49 +1,62 @@
 import React, { useState } from 'react';
-import uuid from 'uuid/v4';
+import { useMutation } from '@apollo/react-hooks';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import categories from '../ mockServer/categories';
-import users from '../ mockServer/users';
+import { UPDATE_TASK } from '../mutations';
+import { GET_TASKS } from '../queries';
+import { DialogActions } from '@material-ui/core';
 
-const TaskDialog = (props) => {
-  const { close, submit, task } = props;
+
+const EditTaskDialog = (props) => {
+  const { categories, close, task, users } = props;
   const [assignee, setAsignee] = useState(task?.assignee?.id || '');
   const [description, setDescription] = useState(task?.description || '');
   const [category, setCategory] = useState(task?.category?.id || 'house');
   const [estimatedTime, setEstimatedTime] = useState(task?.estimatedTime || '');
   const [actualTime, setActualTime] = useState(task?.actualTime || '');
 
+  const handleError = (err) => console.error(err);
+
+  const [updateTask, { loading }] = useMutation(UPDATE_TASK, {
+    awaitRefetchQueries: true,
+    refetchQueries: [{ query: GET_TASKS }],
+    onError: handleError,
+    onCompleted: () => close()
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    submit({
-      id: task?.id || uuid(),
-      assignee: {
-        id: assignee,
-        name: users.find(user => user.id === assignee)?.name || '',
-      },
-      category: {
-        id: category,
-        name: categories.find(cat => cat.id === category)?.name || '',
-      },
-      description,
-      estimatedTime: Number(estimatedTime),
-      actualTime: actualTime,
-      isComplete: task?.isComplete || false,
+    updateTask({
+      variables: {
+        updates: {
+          id: task.id,
+          assignee: {
+            id: assignee,
+            name: users.find(user => user.id === assignee)?.name || '',
+          },
+          category: {
+            id: category,
+            name: categories.find(cat => cat.id === category)?.name || '',
+          },
+          description,
+          estimatedTime: Number(estimatedTime),
+          actualTime: Number(actualTime) || task.actualTime,
+        }
+      }
     });
   }
 
-  const title = task ? 'Edit Task' : 'Create New Task';
-
   return (
     <Dialog
+      disableBackdropClick={loading}
       open
       onClose={close}
     >
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle>Edit Task</DialogTitle>
       <DialogContent className="new-task-form">
         <form onSubmit={handleSubmit}>
           <TextField
@@ -115,17 +128,29 @@ const TaskDialog = (props) => {
               variant="outlined"
             />
           )}
-          <Button
-            color="primary"
-            type="submit"
-            variant="contained"
-          >
-            {task ? 'Save Changes' : 'Create Task'}
-          </Button>
+          <DialogActions>
+            <Button
+              color="default"
+              disabled={loading}
+              onClick={(e) => close()}
+              variant="contained"
+            >
+              Cancel
+            </Button>
+            <Button
+              color="primary"
+              disabled={loading}
+              type="submit"
+              variant="contained"
+            >
+              Save Changes
+            </Button>
+          </DialogActions>
+
         </form>
       </DialogContent>
     </Dialog>
   )
 }
 
-export default TaskDialog;
+export default EditTaskDialog;

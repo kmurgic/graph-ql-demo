@@ -14,14 +14,14 @@ const getUsers = () => data.users;
 const getTasks = () => data.tasks;
 const addTask = (task) => {
   const id = uuid();
-  const newTask = { id, ...task };
+  const newTask = { id, isComplete: false, ...task };
   data.tasks.push(newTask);
   return newTask;
 }
 const updateTask = (updates) => {
-  const id = newTask.id;
+  const id = updates.id;
   let updatedTask;
-  const newTasks = tasks.map(task => {
+  const newTasks = data.tasks.map(task => {
     if (task.id !== id) return task;
     updatedTask = { ...task, ...updates };
     return updatedTask;
@@ -30,7 +30,7 @@ const updateTask = (updates) => {
   return updatedTask;
 };
 const deleteTask = (id) => {
-  const newTasks = tasks.filter(task => task.id !== id);
+  const newTasks = data.tasks.filter(task => task.id !== id);
   data.tasks = newTasks;
   return { id };
 }

@@ -1,42 +1,46 @@
 import React, { useState } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import Typography from '@material-ui/core/Typography';
 import TaskActions from './TaskActions';
 import TaskTable from './TaskTable';
-import TaskDialog from './TaskDialog';
-import mockTasks from '../ mockServer/mockTasks';
+import NewTaskDialog from './NewTaskDialog';
+import EditTaskDialog from './EditTaskDialog';
+import { GET_TASKS, GET_USERS_AND_CATEGORIES } from '../queries';
 
 const TaskManager = () => {
   const [newTaskDialogOpen, setTaskDialogOpen] = useState(false);
-  const [tasks, setTasks] = useState(mockTasks);
+
+  const {
+    data: taskData,
+    loading: tasksLoading,
+    error: tasksError
+  } = useQuery(GET_TASKS);
+
+  const {
+    data: usersAndCategoriesData,
+    loading: usersAndCategoriesLoading,
+    error: usersAndCategoriesError
+  } = useQuery(GET_USERS_AND_CATEGORIES);
+
+  const loading = tasksLoading || usersAndCategoriesLoading;
+  const error = !!tasksError || !!usersAndCategoriesError;
+
+  const { categories, users } = usersAndCategoriesData || {};
+  const { tasks } = taskData || {};
   const [activeTask, setActiveTask] = useState(null);
-  const toggleTaskComplete = id => {
-    setTasks(prevTasks => prevTasks.map(task => {
-      if (task.id !== id) return task;
-      return { ...task, isComplete: !task.isComplete };
-    }));
-  }
-  const removeTask = id => {
-    setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
-  }
-  const addTask = newTask => {
-    setTasks(prevTasks => [...prevTasks, newTask]);
-    setActiveTask(null);
+
+  const closeNewTaskDialog = () => {
     setTaskDialogOpen(false);
   }
-  const closeTaskDialog = () => {
+  const closeEditTaskDialog = () => {
     setActiveTask(null);
-    setTaskDialogOpen(false);
   }
   const openEditTask = (id) => {
     setActiveTask(tasks.find(task => task.id === id));
   }
-  const completeEditTask = (newTask) => {
-    setTasks(prevTasks => prevTasks.map(task => {
-      if (task.id !== newTask.id) return task;
-      return { id: task.id, ...newTask }
-    }))
-    setActiveTask(null);
-  }
+
+  if (loading) return 'Loading...'
+  if (error) return 'Server Error!';
 
   return (
     <div className="task-manager">
@@ -49,17 +53,24 @@ const TaskManager = () => {
           <TaskTable
             tasks={tasks}
             editTask={openEditTask}
-            removeTask={removeTask}
-            toggleTaskComplete={toggleTaskComplete}
           />
         )
         : <Typography>No tasks assigned.</Typography>
       }
-      {(newTaskDialogOpen || activeTask) &&
-        <TaskDialog
-          submit={activeTask ? completeEditTask : addTask}
-          close={() => closeTaskDialog(false)}
+      {newTaskDialogOpen &&
+        <NewTaskDialog
+          categories={categories}
+          close={closeNewTaskDialog}
           task={activeTask}
+          users={users}
+        />
+      }
+      {activeTask &&
+        <EditTaskDialog
+          categories={categories}
+          close={closeEditTaskDialog}
+          task={activeTask}
+          users={users}
         />
       }
     </div>

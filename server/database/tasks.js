@@ -1,35 +1,34 @@
 const tasks = [
   {
-    id: 1,
+    id: '1',
     assignee: {
       id: '1',
       name: 'Caleb',
     },
     category: {
-      id: 'house',
-      name: 'House'
+      id: 'yard',
+      name: 'Yard'
     },
-    description: 'Finish presentation',
+    description: 'Mow lawn',
     isComplete: false,
-    estimatedTime: 720,
+    estimatedTime: 75,
   },
   {
-    id: 2,
+    id: '2',
     assignee: {
       id: '4',
       name: 'Yasha',
     },
     category: {
-      id: 'house',
-      name: 'House'
+      id: 'garden',
+      name: 'Garden'
     },
-    description: 'Vacuum',
-    isComplete: true,
-    estimatedTime: 30,
-    actualTime: 20,
+    description: 'Weed tomato bed',
+    isComplete: false,
+    estimatedTime: 50,
   },
   {
-    id: 3,
+    id: '3',
     assignee: {
       id: '2',
       name: 'Bo',
@@ -38,25 +37,23 @@ const tasks = [
       id: 'house',
       name: 'House'
     },
-    description: 'Make bed',
-    isComplete: true,
-    estimatedTime: 10,
-    actualTime: 12
+    description: 'Vacuum living room and kitchen',
+    isComplete: false,
+    estimatedTime: 30,
   },
   {
-    id: 4,
+    id: '4',
     assignee: {
       id: '3',
       name: 'Molly',
     },
     category: {
-      id: 'house',
-      name: 'House'
+      id: 'livestock',
+      name: 'Livestock'
     },
-    description: 'Meet with Ivo',
-    isComplete: true,
+    description: 'Milk goats',
+    isComplete: false,
     estimatedTime: 45,
-    actualTime: 60
   },
 ];
 
