@@ -10,8 +10,9 @@ const tasks = [
       name: 'Yard'
     },
     description: 'Mow lawn',
-    isComplete: false,
+    isComplete: true,
     estimatedTime: 75,
+    actualTime: 90,
   },
   {
     id: '2',
