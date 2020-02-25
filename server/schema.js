@@ -7,9 +7,9 @@ const typeDefs = gql`
   }
 
   enum CategoryName {
-    house
-    farm
-    garden
+    House
+    Livestock
+    Garden
   }
 
   type Category {

@@ -4,7 +4,7 @@ const categories = [
     name: 'House'
   },
   {
-    id: 'farm',
+    id: 'livestock',
     name: 'Livestock'
   },
   {
