@@ -29,26 +29,11 @@ const Task = props => {
     onError: handleError,
   });
 
-  const [updateTaskMutation] = useMutation(UPDATE_TASK, {
-    awaitRefetchQueries: true,
-    refetchQueries: [{ query: GET_TASKS }],
-    onError: handleError,
-  });
-
   const removeTask = () => {
     const variables = { id };
     removeTaskMutation({ variables });
   };
 
-  const toggleTaskComplete = () => {
-    const variables = {
-      updates: {
-        id,
-        isComplete: !isComplete
-      }
-    };
-    updateTaskMutation({ variables });
-  };
 
   return (
     <TableRow>

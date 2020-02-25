@@ -44,7 +44,6 @@ const EditTaskDialog = (props) => {
           },
           description,
           estimatedTime: Number(estimatedTime),
-          actualTime: Number(actualTime) || task.actualTime,
         }
       }
     });

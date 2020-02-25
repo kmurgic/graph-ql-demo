@@ -24,9 +24,8 @@ const tasks = [
       name: 'House'
     },
     description: 'Vacuum',
-    isComplete: true,
+    isComplete: false,
     estimatedTime: 30,
-    actualTime: 20,
   },
   {
     id: 3,
@@ -39,9 +38,8 @@ const tasks = [
       name: 'House'
     },
     description: 'Make bed',
-    isComplete: true,
+    isComplete: false,
     estimatedTime: 10,
-    actualTime: 12
   },
   {
     id: 4,
@@ -54,9 +52,8 @@ const tasks = [
       name: 'House'
     },
     description: 'Meet with Ivo',
-    isComplete: true,
+    isComplete: false,
     estimatedTime: 45,
-    actualTime: 60
   },
 ];
 

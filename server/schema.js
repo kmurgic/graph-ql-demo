@@ -23,9 +23,7 @@ const typeDefs = gql`
     assignee: User!
     category: Category!
     description: String!
-    isComplete: Boolean!
     estimatedTime: Int
-    actualTime: Int
   }
 
   type Query {
@@ -58,7 +56,6 @@ const typeDefs = gql`
     description: String
     isComplete: Boolean
     estimatedTime: Int
-    actualTime: Int
   }
 
   type DeleteTaskResponse {
