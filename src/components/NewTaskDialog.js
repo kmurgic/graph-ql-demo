@@ -20,8 +20,6 @@ const NewTaskDialog = (props) => {
 
   const handleError = (err) => console.error(err);
   const [addTask, { loading }] = useMutation(ADD_TASK, {
-    awaitRefetchQueries: true,
-    refetchQueries: [{ query: GET_TASKS }],
     onError: handleError,
     onCompleted: () => close()
   });
