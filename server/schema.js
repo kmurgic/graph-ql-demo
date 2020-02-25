@@ -54,7 +54,6 @@ const typeDefs = gql`
     assignee: UserInput
     category: CategoryInput
     description: String
-    isComplete: Boolean
     estimatedTime: Int
   }
 

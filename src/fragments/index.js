@@ -12,7 +12,6 @@ export const TaskFragment = gql`
       name
     }
     description
-    isComplete
     estimatedTime
   }
 `
