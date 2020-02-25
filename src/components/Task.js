@@ -34,6 +34,9 @@ const Task = props => {
     removeTaskMutation({ variables });
   };
 
+  const toggleTaskComplete = () => {
+  }
+
 
   return (
     <TableRow>
