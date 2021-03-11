@@ -41,7 +41,7 @@ const EditTaskDialog = (props) => {
             name: categories.find(cat => cat.id === category)?.name || '',
           },
           description,
-          estimatedTime: Number(estimatedTime),
+          estimatedTime: estimatedTime ? Number(estimatedTime): undefined,
         }
       }
     });
