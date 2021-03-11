@@ -24,6 +24,8 @@ const typeDefs = gql`
     category: Category!
     description: String!
     estimatedTime: Int
+    isComplete: Boolean
+    actualTime: Int
   }
 
   type Query {
@@ -55,6 +57,8 @@ const typeDefs = gql`
     category: CategoryInput
     description: String
     estimatedTime: Int
+    isComplete: Boolean
+    actualTime: Int
   }
 
   type DeleteTaskResponse {

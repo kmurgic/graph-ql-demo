@@ -23,6 +23,7 @@ const EditTaskDialog = (props) => {
 
   const [updateTask, { loading }] = useMutation(UPDATE_TASK, {
     onError: handleError,
+    refetchQueries: [{ query: GET_TASKS }],
     onCompleted: () => close()
   });
 
@@ -42,6 +43,7 @@ const EditTaskDialog = (props) => {
           },
           description,
           estimatedTime: estimatedTime ? Number(estimatedTime): undefined,
+          actualTime: actualTime ? Number(actualTime) : undefined
         }
       }
     });

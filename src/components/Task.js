@@ -29,12 +29,18 @@ const Task = props => {
     onError: handleError,
   });
 
+  const [updateTaskMutation] = useMutation(UPDATE_TASK, {
+    onError: handleError,
+  })
+
   const removeTask = () => {
     const variables = { id };
     removeTaskMutation({ variables });
   };
 
   const toggleTaskComplete = () => {
+    const variables = { updates: { id, isComplete: !isComplete } }
+    updateTaskMutation({ variables })
   }
 
 
